@@ -22,7 +22,7 @@ func getUserByParam(key string, param string) (models.User, error) {
 
 	defer storage.DisconnectFromDatabase(client)
 
-	usersCollection := client.Database(mongoDatabase).Collection("Users")
+	usersCollection := client.Database(mongoDatabase).Collection("users")
 
 	if key == "_id" {
 		objID, err = primitive.ObjectIDFromHex(param)

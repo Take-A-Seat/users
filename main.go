@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/Take-A-Seat/auth/auth"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -33,18 +34,18 @@ func main() {
 		AllowCredentials: true,
 	}))
 
-	users := router.Group("/api/users")
+	users := router.Group("/users")
 	{
 		users.POST("/validateUser", handleValidateUser)
 		users.POST("/", handleCreateUser)
 	}
 
 	//privateRoutesUsers need Authorization token in header
-	//protectedUsers := router.Group("/api/users")
-	//protectedUsers.Use(auth.Middleware("https://storage.bignary.com/api/auth/isAuthenticated"))
-	//{
-	//
-	//}
+	protectedUsers := router.Group("/users")
+	protectedUsers.Use(auth.AuthMiddleware("http://54.93.123.171/auth/isAuthenticated"))
+	{
+
+	}
 
 	if err := router.Run(":" + port); err != nil {
 		log.Fatal("Port already in use!")

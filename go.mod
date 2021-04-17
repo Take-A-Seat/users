@@ -3,7 +3,8 @@ module users
 go 1.16
 
 require (
-	github.com/Take-A-Seat/storage v0.0.0-20210417105022-9fb461eb321f // indirect
+	github.com/Take-A-Seat/auth v0.0.0-20210417113003-31f8a584c9f8
+	github.com/Take-A-Seat/storage v0.0.0-20210417105022-9fb461eb321f
 	github.com/aws/aws-sdk-go v1.38.21 // indirect
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.1
