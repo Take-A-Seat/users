@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/Take-A-Seat/storage"
 	"github.com/Take-A-Seat/storage/models"
 	"go.mongodb.org/mongo-driver/bson"
@@ -19,16 +20,22 @@ func getUserByParam(key string, param string) (models.User, error) {
 	if err != nil {
 		return models.User{},err
 	}
+	fmt.Println("trecut de login")
 
 	defer storage.DisconnectFromDatabase(client)
 
 	usersCollection := client.Database(mongoDatabase).Collection("users")
+	fmt.Println("trecut de connect la colectie")
 
 	if key == "_id" {
+		fmt.Println("erroare la find")
 		objID, err = primitive.ObjectIDFromHex(param)
 		err = usersCollection.FindOne(context.TODO(), bson.D{{key, objID}}).Decode(&user)
 	} else {
+
 		err = usersCollection.FindOne(context.TODO(), bson.D{{key, param}}).Decode(&user)
+		fmt.Println("trecut de find",err)
+
 	}
 
 	if err != nil {

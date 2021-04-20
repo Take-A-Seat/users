@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Take-A-Seat/auth/auth"
+	"github.com/Take-A-Seat/auth/validatorAuth"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -26,7 +26,7 @@ func main() {
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000", "*"},
+		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"PUT", "PATCH", "DELETE", "GET", "POST", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accepts", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -42,7 +42,7 @@ func main() {
 
 	//privateRoutesUsers need Authorization token in header
 	protectedUsers := router.Group("/users")
-	protectedUsers.Use(auth.AuthMiddleware("http://54.93.123.171/auth/isAuthenticated"))
+	protectedUsers.Use(validatorAuth.AuthMiddleware("http://54.93.123.171/auth/isAuthenticated"))
 	{
 
 	}
