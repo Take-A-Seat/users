@@ -42,7 +42,7 @@ func main() {
 
 	//privateRoutesUsers need Authorization token in header
 	protectedUsers := router.Group("/users")
-	protectedUsers.Use(validatorAuth.AuthMiddleware("http://54.93.123.171/auth/isAuthenticated"))
+	protectedUsers.Use(validatorAuth.AuthMiddleware("http://www.api.takeaseat.site/auth/isAuthenticated"))
 	{
 
 	}
